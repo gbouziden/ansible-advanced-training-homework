@@ -1,0 +1,33 @@
+- hosts: all
+  gather_facts: true
+  become: yes
+  roles:
+    - name: osp-facts
+  
+  tasks:
+  - name: distribute repo
+    template:
+      src: ./open_three-tier-app.repo
+      dest: /etc/yum.repos.d/open_three-tier-app.repo
+    mode: 0644
+
+  # Setup front-end load balancer tier
+  - name: setup haproxy
+    hosts: frontends
+    include_role:
+      name: haproxy
+
+  # Setup application servers tier
+
+  - name: setup app tier
+    hosts: apps
+    include_role:
+      name: tomcat
+
+  # Setup database tier
+
+  - name: setup database tier
+    hosts: appdbs
+    include_role:
+      name: postgres
+

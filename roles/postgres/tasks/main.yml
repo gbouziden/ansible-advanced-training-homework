@@ -1,0 +1,19 @@
+- name: install postgres
+  package:
+    name: postgresql-server
+    state: present
+  notify: restart_postgres
+- name: enable postgres at boot
+  service:
+    name: postgresql
+    enabled: yes
+- name: check if pqsql dir exists
+  stat:
+    path: /var/lib/pgsql
+  register: file_details
+
+  
+- name: initilize postgres
+  command: postgresql-setup initdb
+  when: not file_details.stat.exists
+
