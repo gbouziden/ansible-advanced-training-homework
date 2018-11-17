@@ -1,7 +1,25 @@
 - name: Generate var file for order_svc.sh script
+  template:
+    src: aws_jq_vars.yml
+    dest: /tmp/aws_jq_vars.yml
 
 - name: Generate var file for tower module
+  template:
+    src: tower_info.yml
+    dest: /tmp/tower_info.yml
 
-- name: Copy opentlc ssh keys
+- name: Copy sso ssh keys
+  copy:
+    src: "{{path_to_opentlc_key}}"
+    dest: /root/secret.pem
+
+#- name: Copy AWS read only creds
+#  copy:
+#    src: read_only.json 
+#    dest: /root/read_only.json
 
 - name: Copy inventory vars
+  copy:
+    src: inventory_vars.json
+    dest: /root/inventory_vars.json
+

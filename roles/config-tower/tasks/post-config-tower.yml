@@ -1,8 +1,15 @@
-- name: Create Homework Assignment project 
+- name: Create Homework Assignment project
+  command: |
+    tower-cli project create --organization="{{org_name}}" --scm-type=git --scm-branch="{{scm_branch}}" --scm-url="{{ scm_url }}" --scm-update-on-launch=True -n "{{ proj_name }}"
+#- name: Download Credential file 
+#  copy:
+#    src: workstation_creds.yml
+#    dest: /root/workstation_creds.yml
 
+- name: Create credential to connect to workstation
+  command: |
+    tower-cli credential create --name "Workstation_ansible" --organization "Default" --credential-type Machine 
 
-- name: Machine Credentail to connect to workstation using openstack.pub
-  tower_credential:
 
 - name: Create Inventory
   command: |

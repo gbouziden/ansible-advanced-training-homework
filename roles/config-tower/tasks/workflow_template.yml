@@ -5,9 +5,9 @@
 - name: Create workflow schema 
   template:
     src: workflow.j2
-    dest: /root/workflow.yml
+    dest: /tmp/workflow.yml
 
 - name: Create workflow using schema
   command: |
-    tower-cli workflow schema {{workflow_template_name}} @/root/workflow.yml
+    tower-cli workflow schema {{workflow_template_name}} @/tmp/workflow.yml
 
