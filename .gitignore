@@ -1,3 +1,4 @@
 license.txt
 credential.rc
 *.retry
+ssh.cfg.bak
