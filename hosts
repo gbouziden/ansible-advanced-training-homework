@@ -12,7 +12,7 @@ timeout=60
 
 [jumpbox]
 #workstation-6334.rhpds.opentlc.com ansible_ssh_user=cloud-user ansible_ssh_private_key_file=~/.ssh/openstack.pem
-workstation-adac.rhpds.opentlc.com 
+workstation-"{{ osp-uid }}".rhpds.opentlc.com 
 
 #[rhpds.opentlc.com:children]
 #frontends
